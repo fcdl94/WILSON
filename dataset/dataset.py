@@ -16,7 +16,6 @@ class IncrementalSegmentationDataset(data.Dataset):
                  masking_value=0,
                  step=0,
                  weakly=False,
-                 saliency=False,
                  pseudo=None):
 
         # take index of images with at least one class in labels and all classes in labels+labels_old+[255]
@@ -28,10 +27,9 @@ class IncrementalSegmentationDataset(data.Dataset):
         else:  # In both test and validation we want to use all data available (even if some images are all bkg)
             idxs = None
 
-        self.dataset = self.make_dataset(root, train, indices=idxs, saliency=saliency, pseudo=pseudo)
+        self.dataset = self.make_dataset(root, train, indices=idxs, pseudo=pseudo)
         self.transform = transform
         self.weakly = weakly  # don't use weakly in val
-        self.saliency = saliency
         self.train = train
 
         self.step_dict = step_dict
@@ -83,27 +81,11 @@ class IncrementalSegmentationDataset(data.Dataset):
         if index < len(self):
             data = self.dataset[index]
             img, lbl, lbl_1h = data[0], data[1], data[2]
-            # if self.saliency:
-            #     sal = data[3]
 
-            # if self.weakly:
-                # if not (self.train and self.weakly):
             img, lbl = self.transform(img, lbl)
             lbl = self.transform_lbl(lbl)
             l1h = self.transform_1h(lbl_1h)
             return img, lbl, l1h
-                # else:
-                #     l1h = self.transform_1h(lbl_1h)
-                #     if self.saliency:
-                #         img, sal = self.transform(img, sal)
-                #         sal = sal[:, :, 0].long() / 255
-                #         return img, l1h, sal
-                #     else:
-                #         img = self.transform(img)
-                #         return img, l1h
-            # else:
-            #     img, lbl = self.transform(img, lbl)
-            #     lbl = self.transform_lbl(lbl)
 
         else:
             raise ValueError("absolute value of index should not exceed dataset length")

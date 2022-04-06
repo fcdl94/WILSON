@@ -58,7 +58,7 @@ def get_dataset(opts):
     train_dst = dataset(root=opts.data_root, step_dict=step_dict, train=True, transform=train_transform,
                         idxs_path=path_base_train + f"/train-{opts.step}.npy", masking_value=masking_value,
                         masking=not opts.no_mask, overlap=opts.overlap, step=opts.step, weakly=opts.weakly,
-                        saliency=opts.saliency, pseudo=pseudo)
+                        pseudo=pseudo)
 
     # Val is masked with 0 when label is not known or is old (masking=True, masking_value=0)
     val_dst = dataset(root=opts.data_root, step_dict=step_dict, train=False, transform=val_transform,

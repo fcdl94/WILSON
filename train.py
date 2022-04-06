@@ -53,7 +53,6 @@ class Trainer:
         self.use_aff = opts.affinity
         self.weak_single_stage_dist = opts.ss_dist
         self.pseudo_epoch = opts.pseudo_ep
-        self.l_sal = opts.l_sal
         cls_classes = self.tot_classes
         self.pseudolabeler = None
 
@@ -153,7 +152,6 @@ class Trainer:
         l_cam_out = 0.0
         l_cam_int = 0.0
         l_seg = 0.0
-        l_sal = 0.0
         l_cls = 0.0
         interval_loss = 0.0
 
@@ -317,7 +315,6 @@ class Trainer:
                     x = cur_epoch * len(train_loader) + cur_step + 1
                     logger.add_scalar('Loss/tot', interval_loss, x, intermediate=True)
                     logger.add_scalar('Loss/CAM_int', l_cam_int, x, intermediate=True)
-                    logger.add_scalar('Loss/SAL_int', l_sal, x, intermediate=True)
                     logger.add_scalar('Loss/CAM_out', l_cam_out, x, intermediate=True)
                     logger.add_scalar('Loss/SEG_int', l_cls, x, intermediate=True)
                     logger.add_scalar('Loss/SEG_out', l_seg, x, intermediate=True)

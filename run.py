@@ -169,8 +169,8 @@ def main(opts):
                 logger.info(val_metrics.to_str(val_score_cam))
                 logger.print("Done validation CAM")
 
-            logger.commit()
-            logger.info(f"End of Validation {cur_epoch}/{opts.epochs}")
+        logger.commit()
+        logger.info(f"End of Validation {cur_epoch}/{opts.epochs}")
 
         cur_epoch += 1
 
@@ -200,7 +200,7 @@ def main(opts):
                                   sampler=DistributedSampler(test_dst, num_replicas=world_size, rank=rank),
                                   num_workers=opts.num_workers)
 
-    val_score, _ = trainer.validate(loader=test_loader, metrics=val_metrics)
+    val_score, = trainer.validate(loader=test_loader, metrics=val_metrics)
     logger.info(f"*** End of Test")
     logger.info(val_metrics.to_str(val_score))
     logger.add_table("Test/Class_IoU", val_score['Class IoU'])

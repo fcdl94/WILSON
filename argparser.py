@@ -26,6 +26,8 @@ def modify_command_options(opts):
     opts.no_overlap = not opts.overlap
     opts.pooling = opts.crop_size // opts.output_stride
 
+    opts.lr_head = 1. if opts.step == 0 else opts.lr_head
+
     return opts
 
 
