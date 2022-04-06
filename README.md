@@ -1,5 +1,5 @@
 # Incremental Learning in Semantic Segmentation from Image Labels
-## Fabio Cermelli, Dario Fontanel, Antonio Tavera, Marco Ciccone, Barbara Caputo -- CVPR 22 [Paper](https://arxiv.org/abs/2112.01882) [Supp](https://github.com/fcdl94/WILSON/files/8424466/10756-supp.pdf))
+## Fabio Cermelli, Dario Fontanel, Antonio Tavera, Marco Ciccone, Barbara Caputo -- CVPR 22 [Paper](https://arxiv.org/abs/2112.01882) [Supp](https://github.com/fcdl94/WILSON/files/8424466/10756-supp.pdf)
 #### Official PyTorch Implementation
 
 ![teaser](https://raw.githubusercontent.com/fcdl94/WILSON/master/docs/teas.png)
